@@ -38,7 +38,7 @@ namespace CO.WebAPI.Controllers
       {
          _productManager.Add(new Product
          {
-            Id = product.Id,
+            Id = Guid.NewGuid().ToString(),
             Name = product.Name,
             Value = product.Value
          });
