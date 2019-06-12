@@ -19,37 +19,37 @@ namespace CO.WebAPI.Controllers
          _productManager = productManager;
 
       }
-      
+
       [HttpGet]
       public async Task<IEnumerable<Product>> Get()
       {
          return await _productManager.GetProducts();
       }
-          
+
       [HttpGet("{id}")]
       public async Task<Product> Get(string id)
       {
          return await _productManager.GetByID(id);
       }
-      
-      
+
+
       [HttpPost]
-      public void Post([FromBody] Product product)
+      public void Post(Product product)
       {
          _productManager.Add(new Product
          {
-            
+            Id = product.Id,
             Name = product.Name,
             Value = product.Value
          });
       }
 
       [HttpPut("{id}")]
-      public void Put([FromBody]Product product,string id )
+      public void Put(Product product, string id)
       {
          _productManager.Update(product, id);
       }
-            
+
       [HttpDelete("{id}")]
       public void Delete(string id)
       {
