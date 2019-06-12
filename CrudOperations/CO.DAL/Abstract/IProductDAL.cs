@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CO.DAL.Abstract
 {
-   public interface IProductDAL : IRepositoryAccess<Product>
+   public interface IProductDAL : IRepository<Product>
    {
    }
 }
