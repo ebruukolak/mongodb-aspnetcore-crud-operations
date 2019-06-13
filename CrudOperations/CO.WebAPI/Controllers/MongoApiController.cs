@@ -32,7 +32,6 @@ namespace CO.WebAPI.Controllers
          return await _productManager.GetByID(id);
       }
 
-
       [HttpPost]
       public void Post(Product product)
       {
@@ -42,6 +41,13 @@ namespace CO.WebAPI.Controllers
             Name = product.Name,
             Value = product.Value
          });
+      }
+
+      [HttpPost("CreateProducts")]
+      public void CreateProducts(List<Product> products)
+      {
+         if (products.Count()>0)
+            _productManager.AddManyProducts(products);
       }
 
       [HttpPut("{id}")]

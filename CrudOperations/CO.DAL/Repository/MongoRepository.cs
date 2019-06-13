@@ -39,9 +39,10 @@ namespace CO.DAL.Repository
          collection.InsertOne(entity);
       }
 
-      public void AddRange(IEnumerable<TEntity> list)
+      public void AddRange(List<TEntity> list)
       {
-         collection.InsertMany(list);
+         if (list != null)
+            collection.InsertMany(list);
       }
 
       public void Update(TEntity entity, string id)

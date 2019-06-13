@@ -11,7 +11,7 @@ namespace CO.DAL.Repository
       Task<T> Get(string id);
       Task<IEnumerable<T>> GetAll();      
       void Add(T entity);
-      void AddRange(IEnumerable<T> list);
+      void AddRange(List<T> list);
       void Update(T entity, string id);
       void Delete(string id);    
    }

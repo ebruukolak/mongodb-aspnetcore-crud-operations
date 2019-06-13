@@ -43,5 +43,10 @@ namespace CO.Manager.Concrete
       {
          _productDAL.Update(p,Id);
       }
+
+      public void AddManyProducts(List<Product> products)
+      {
+         _productDAL.AddRange(products);
+      }
    }
 }

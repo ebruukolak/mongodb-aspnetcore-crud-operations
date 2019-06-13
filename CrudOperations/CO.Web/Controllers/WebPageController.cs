@@ -47,7 +47,7 @@ namespace CO.Web.Controllers
          using (HttpClient client = new HttpClient())
          {
             var productData = JsonConvert.SerializeObject(productViewModel);
-            HttpContent content = new StringContent(productData, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
+            HttpContent content = new StringContent(productData, System.Text.Encoding.UTF8, "application/json");
 
             await client.PostAsync("http://localhost:3986/api/mongoapi/", content);
 
@@ -55,6 +55,33 @@ namespace CO.Web.Controllers
          }
 
       }
+
+      [HttpPost]
+      public async Task<IActionResult> CreateProducts()
+      {
+         List<ProductViewModel> products = new List<ProductViewModel>();
+         for (int i = 0; i < 1000; i++)
+         {
+            products.Add(new ProductViewModel
+            {
+               Id = Guid.NewGuid().ToString(),
+               Name = "name",
+               Value = "value"
+            });
+
+         }
+         using (HttpClient client = new HttpClient())
+         {
+            var productData = JsonConvert.SerializeObject(products);
+            HttpContent content = new StringContent(productData, System.Text.Encoding.UTF8, "application/json");
+
+            await client.PostAsync("http://localhost:3986/api/mongoapi/CreateProducts", content);
+
+            return RedirectToAction("GetList");
+         }
+
+      }
+
 
       [HttpPut]
       public async Task<IActionResult> EditProduct(ProductViewModel productViewModel)

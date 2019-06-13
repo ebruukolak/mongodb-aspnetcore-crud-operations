@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace CO.Manager.Abstract
 {
-    public interface IProductManager
-    {
+   public interface IProductManager
+   {
       Task<Product> GetByID(string Id);
       Task<IEnumerable<Product>> GetProducts();
       void Add(Product p);
-      void Update(Product p,string Id);
+      void AddManyProducts(List<Product> products);
+      void Update(Product p, string Id);
       void Delete(string Id);
    }
 }
