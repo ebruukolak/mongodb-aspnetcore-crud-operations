@@ -32,5 +32,57 @@ namespace CO.Web.Controllers
             return View(product);
          }
       }
+
+      public IActionResult CreateProduct()
+      {
+         return View();
+      }
+
+      [HttpPost]
+      public async Task<IActionResult> CreateProduct(ProductViewModel productViewModel)
+      {
+         if (!ModelState.IsValid)
+            return View(productViewModel);
+
+         using (HttpClient client = new HttpClient())
+         {
+            var productData = JsonConvert.SerializeObject(productViewModel);
+            HttpContent content = new StringContent(productData, System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
+
+            await client.PostAsync("http://localhost:3986/api/mongoapi/", content);
+
+            return RedirectToAction("GetList");
+         }
+
+      }
+
+      [HttpPut]
+      public async Task<IActionResult> EditProduct(ProductViewModel productViewModel)
+      {
+         using (HttpClient client = new HttpClient())
+         {
+            var productData = JsonConvert.SerializeObject(productViewModel);
+            HttpContent content = new StringContent(productData, System.Text.Encoding.UTF8, "application/json");
+
+            await client.PutAsync("http://localhost:3986/api/mongoapi/", content);
+
+            return RedirectToAction("GetList");
+         }
+      }
+
+      [HttpDelete]
+      public async Task<IActionResult> DeleteProduct(string id)
+      {
+         using (HttpClient client = new HttpClient())
+         {
+            var result = await client.DeleteAsync($"http://localhost:3986/api/mongoapi/{id}");
+
+            if (result.IsSuccessStatusCode)
+            {
+               return RedirectToAction("GetList");
+            }
+            return null;
+         }
+      }
    }
 }
