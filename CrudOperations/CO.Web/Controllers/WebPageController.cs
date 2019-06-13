@@ -47,7 +47,7 @@ namespace CO.Web.Controllers
          using (HttpClient client = new HttpClient())
          {
             var productData = JsonConvert.SerializeObject(productViewModel);
-            HttpContent content = new StringContent(productData, System.Text.Encoding.UTF8, "application/json");
+            HttpContent content = new StringContent(productData, System.Text.Encoding.UTF8, "text/plain");
 
             await client.PostAsync("http://localhost:3986/api/mongoapi/", content);
 

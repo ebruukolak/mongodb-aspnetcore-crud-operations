@@ -15,7 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CO.Service", "CO.Service", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CO.Client", "CO.Client", "{FC93331B-E160-4503-89A0-242051CC60EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CO.Web", "CO.Web\CO.Web.csproj", "{1720A0F1-65D6-4CDF-A0CF-92440F63BC98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CO.Web", "CO.Web\CO.Web.csproj", "{1720A0F1-65D6-4CDF-A0CF-92440F63BC98}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CO.Test", "CO.Test", "{48701CF3-688F-4EBE-9D62-EBB1159E8444}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
