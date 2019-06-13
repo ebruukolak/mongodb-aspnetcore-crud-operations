@@ -37,7 +37,6 @@ namespace CO.WebAPI.Controllers
       {
          _productManager.Add(new Product
          {
-            Id = Guid.NewGuid().ToString(),
             Name = product.Name,
             Value = product.Value
          });
@@ -46,7 +45,7 @@ namespace CO.WebAPI.Controllers
       [HttpPost("CreateProducts")]
       public void CreateProducts(List<Product> products)
       {
-         if (products.Count()>0)
+         if (products.Count() > 0)
             _productManager.AddManyProducts(products);
       }
 

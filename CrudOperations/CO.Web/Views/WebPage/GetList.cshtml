@@ -10,8 +10,7 @@
         <div class="card">
             <br /><br />
             <a asp-action="CreateProduct" class="btn btn-success universalWidth">Add New Product</a>
-            <a href="#"  class="add1000products btn btn-success universalWidth">Add 1000 Products</a>
-
+            <a href="#" class="add1000products btn btn-success universalWidth">Add 1000 Products</a>
             <br /><br /> <br />
         </div>
         <div class="card">
@@ -20,7 +19,6 @@
                     <table id="myTable" class="table table-bordered table-striped table-hover js-basic-example dataTable">
                         <thead>
                             <tr>
-
                                 <th>Name</th>
                                 <th>Value</th>
                                 <th></th>
@@ -29,7 +27,6 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-
                                 <tr>
                                     @Html.HiddenFor(modelItem => item.Id)
                                     <td>
@@ -41,8 +38,6 @@
                                     <td>
                                         <a href="#" data-id="@item.Id" class="editProduct btn btn-success universalWidth">Edit Product</a>
                                         <a href="#" data-id="@item.Id" class="deleteproduct btn btn-success universalWidth">Delete Product</a>
-
-
                                     </td>
 
                                 </tr>
@@ -79,9 +74,9 @@
                     id: $(this).data('id'),
                     access_token: $("#access_token").val()
                 },
-                success: function (result) {
-                    alert('ok');
-                },
+                //success: function (result) {
+                //    alert('ok');
+                //},
                 error: function (result) {
                     alert('error');
                 }
@@ -93,12 +88,12 @@
             $.ajax({
                 type: "POST",
                 url: '/WebPage/CreateProducts',
-                data: {                    
+                data: {
                     access_token: $("#access_token").val()
                 },
-                success: function (result) {
-                    alert('ok');
-                },
+                //success: function (result) {
+                //    alert('ok');
+                //},
                 error: function (result) {
                     alert('error');
                 }

@@ -25,8 +25,7 @@ namespace CO.DAL.Repository
 
       public async Task<TEntity> Get(string id)
       {
-         ObjectId objId = GetInternalId(id);
-         return await collection.Find<TEntity>(x => x.Id == id || x.objectId == objId).FirstOrDefaultAsync();
+         return await collection.Find<TEntity>(x => x.Id == id).FirstOrDefaultAsync();
       }
 
       public async Task<IEnumerable<TEntity>> GetAll()
@@ -52,19 +51,7 @@ namespace CO.DAL.Repository
 
       public void Delete(string id)
       {
-         var objId = new ObjectId(id);
          collection.DeleteOne(m => m.Id == id);
       }
-
-      private ObjectId GetInternalId(string id)
-      {
-         ObjectId internalId;
-         if (!ObjectId.TryParse(id, out internalId))
-            internalId = ObjectId.Empty;
-
-         return internalId;
-      }
-
-
    }
 }
