@@ -43,14 +43,24 @@ namespace CO.WebAPI.Controllers
       }
 
       [HttpPost("CreateProducts")]
-      public void CreateProducts(List<Product> products)
+      public void CreateProducts()
       {
-         if (products.Count() > 0)
-            _productManager.AddManyProducts(products);
+         List<Product> products = new List<Product>();
+         for (int i = 0; i < 1000; i++)
+         {
+            products.Add(new Product
+            {
+               Name = "name",
+               Value = "value"
+            });
+
+         }
+         _productManager.AddManyProducts(products);
       }
 
-      [HttpPut("{id}")]
-      public void Put(Product product, string id)
+      [HttpPost]
+      [Route("Update{id}")]
+      public void Update(string id,Product product)
       {
          _productManager.Update(product, id);
       }

@@ -47,7 +47,7 @@ namespace CO.Web.Controllers
          using (HttpClient client = new HttpClient())
          {
             var productData = JsonConvert.SerializeObject(productViewModel);
-            HttpContent content = new StringContent(productData, System.Text.Encoding.UTF8, "text/plain");
+            HttpContent content = new StringContent(productData, System.Text.Encoding.UTF8, "application/json");
 
             await client.PostAsync("http://localhost:3986/api/mongoapi/", content);
 
@@ -59,39 +59,38 @@ namespace CO.Web.Controllers
       [HttpPost]
       public async Task<IActionResult> CreateProducts()
       {
-         List<ProductViewModel> products = new List<ProductViewModel>();
-         for (int i = 0; i < 1000; i++)
-         {
-            products.Add(new ProductViewModel
-            {
-               Id = Guid.NewGuid().ToString(),
-               Name = "name",
-               Value = "value"
-            });
-
-         }
          using (HttpClient client = new HttpClient())
          {
-            var productData = JsonConvert.SerializeObject(products);
-            HttpContent content = new StringContent(productData, System.Text.Encoding.UTF8, "application/json");
-
-            await client.PostAsync("http://localhost:3986/api/mongoapi/CreateProducts", content);
-
-            return RedirectToAction("GetList");
+            HttpContent content = new StringContent("", System.Text.Encoding.UTF8, "application/json");
+            var result = await client.PostAsync("http://localhost:3986/api/mongoapi/CreateProducts", null);
+            if (result.IsSuccessStatusCode)
+               return RedirectToAction("GetList");
+            return null;
          }
 
       }
 
+      public IActionResult EditProduct(string id)
+      {
+         if (id == null)
+         {
+            return NotFound();
+         }
+         var product = GetProduct(id);
+         if(product==null)
+            return NotFound();
+         return View(product);
+      }
 
-      [HttpPut]
-      public async Task<IActionResult> EditProduct(ProductViewModel productViewModel)
+      [HttpPost]
+      public async Task<IActionResult> EditProduct(string id,ProductViewModel productViewModel)
       {
          using (HttpClient client = new HttpClient())
          {
             var productData = JsonConvert.SerializeObject(productViewModel);
             HttpContent content = new StringContent(productData, System.Text.Encoding.UTF8, "application/json");
 
-            await client.PutAsync("http://localhost:3986/api/mongoapi/", content);
+            await client.PostAsync($"http://localhost:3986/api/mongoapi/Update{id}", content);
 
             return RedirectToAction("GetList");
          }
