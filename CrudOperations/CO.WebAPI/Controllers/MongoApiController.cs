@@ -33,7 +33,7 @@ namespace CO.WebAPI.Controllers
       }
 
       [HttpPost]
-      public void Post(Product product)
+      public void Post([FromBody]Product product)
       {
          _productManager.Add(new Product
          {
@@ -60,7 +60,7 @@ namespace CO.WebAPI.Controllers
 
       [HttpPost]
       [Route("Update{id}")]
-      public void Update(string id,Product product)
+      public void Update(string id,[FromBody]Product product)
       {
          _productManager.Update(product, id);
       }

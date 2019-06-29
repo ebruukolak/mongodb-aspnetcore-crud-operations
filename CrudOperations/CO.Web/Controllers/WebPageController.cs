@@ -47,7 +47,7 @@ namespace CO.Web.Controllers
          using (HttpClient client = new HttpClient())
          {
             var productData = JsonConvert.SerializeObject(productViewModel);
-            HttpContent content = new StringContent(productData, System.Text.Encoding.UTF8, "application/json");
+            HttpContent content = new StringContent(productData, null, "application/json");
 
             await client.PostAsync("http://localhost:3986/api/mongoapi/", content);
 
@@ -61,7 +61,7 @@ namespace CO.Web.Controllers
       {
          using (HttpClient client = new HttpClient())
          {
-            HttpContent content = new StringContent("", System.Text.Encoding.UTF8, "application/json");
+            HttpContent content = new StringContent("", null, "application/json");
             var result = await client.PostAsync("http://localhost:3986/api/mongoapi/CreateProducts", null);
             if (result.IsSuccessStatusCode)
                return RedirectToAction("GetList");
@@ -88,7 +88,7 @@ namespace CO.Web.Controllers
          using (HttpClient client = new HttpClient())
          {
             var productData = JsonConvert.SerializeObject(productViewModel);
-            HttpContent content = new StringContent(productData, System.Text.Encoding.UTF8, "application/json");
+            HttpContent content = new StringContent(productData, null, "application/json");
 
             await client.PostAsync($"http://localhost:3986/api/mongoapi/Update{id}", content);
 
